@@ -205,7 +205,7 @@ def get(req_handler, routes):
     """ Map a request to the appropriate route of a routes instance. """
     for name, handler in routes.__class__.__dict__.items():
         if hasattr(handler, "__route__"):
-            if None != re.search(handler.__route__, req_handler.path):
+            if re.search(handler.__route__, req_handler.path) is not None:
                 req_handler.send_response(200)
                 req_handler.send_header('Content-Type', 'application/json')
                 req_handler.send_header('Access-Control-Allow-Origin', '*')
